@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TF-IDF News Search Engine</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Times New Roman', serif; background: #f0f2f5; }
+        header {
+            background: #1a1a2e;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 { font-size: 26px; }
+        header p { font-size: 13px; color: #aaa; margin-top: 5px; }
+        .search-box {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .search-box form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .search-box input {
+            width: 500px;
+            padding: 12px 18px;
+            font-size: 15px;
+            border: 2px solid #1a1a2e;
+            border-radius: 25px;
+            outline: none;
+        }
+        .search-box button {
+            padding: 12px 28px;
+            background: #1a1a2e;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .search-box button:hover { background: #16213e; }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .result-count {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .result-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px 25px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            border-left: 5px solid #1a1a2e;
+        }
+        .result-rank {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+        .result-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+        .result-score {
+            display: inline-block;
+            background: #e8f4fd;
+            color: #1a6dad;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+        .result-preview {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .read-btn {
+            display: inline-block;
+            padding: 10px 22px;
+            background: #1a1a2e;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .read-btn:hover {
+            background: #e74c3c;
+        }
+        .no-results {
+            text-align: center;
+            padding: 50px;
+            color: #888;
+            font-size: 16px;
+        }
+        .suggestions {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+        .suggestions span {
+            display: inline-block;
+            background: #e0e0e0;
+            padding: 5px 14px;
+            border-radius: 15px;
+            margin: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>TF-IDF Ranked News Search Engine</h1>
+    <p>Women's Engineering College, Puducherry — Information Storage & Retrieval</p>
+</header>
+
+<div class="search-box">
+    <form method="POST">
+        <input type="text" name="query"
+               placeholder="Search news articles..."
+               value="{{ query }}" required>
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<div class="container">
+    {% if results %}
+        <p class="result-count">
+            Found {{ results|length }} result(s) for
+            "<strong>{{ query }}</strong>"
+        </p>
+
+        {% for r in results %}
+        <div class="result-card">
+            <div class="result-rank">Result #{{ loop.index }}</div>
+            <div class="result-title">{{ r.title }}</div>
+            <div class="result-score">Relevance Score: {{ r.score }}</div>
+            <div class="result-preview">{{ r.preview }}</div>
+            <a href="/article/{{ r.id }}" class="read-btn">
+                📰 Read Full Article →
+            </a>
+        </div>
+        {% endfor %}
+
+    {% elif query %}
+        <div class="no-results">
+            No matching articles found for "<strong>{{ query }}</strong>"
+        </div>
+
+    {% else %}
+        <div class="suggestions">
+            <p>Try searching for:</p><br>
+            <span>artificial intelligence</span>
+            <span>climate change</span>
+            <span>cybersecurity</span>
+            <span>Mars mission</span>
+            <span>electric vehicles</span>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
