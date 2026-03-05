@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Times New Roman', serif; background: #f0f2f5; }
+        header {
+            background: #1a1a2e;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 { font-size: 22px; }
+        header p { font-size: 13px; color: #aaa; margin-top: 5px; }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .article-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .article-title {
+            font-size: 26px;
+            font-weight: bold;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .article-tag {
+            display: inline-block;
+            background: #e8f4fd;
+            color: #1a6dad;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+        .article-divider {
+            border: none;
+            border-top: 2px solid #f0f2f5;
+            margin-bottom: 25px;
+        }
+        .article-content {
+            font-size: 16px;
+            color: #333;
+            line-height: 2;
+            text-align: justify;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 24px;
+            background: #1a1a2e;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-btn:hover { background: #16213e; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>TF-IDF Ranked News Search Engine</h1>
+    <p>Women's Engineering College, Puducherry — Information Storage & Retrieval</p>
+</header>
+
+<div class="container">
+    <div class="article-card">
+        <div class="article-title">{{ title }}</div>
+        <div class="article-tag">Full Article</div>
+        <hr class="article-divider">
+        <div class="article-content">{{ content }}</div>
+        <a href="/" class="back-btn">← Back to Search</a>
+    </div>
+</div>
+
+</body>
+</html>
